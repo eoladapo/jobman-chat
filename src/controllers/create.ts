@@ -9,7 +9,7 @@ import { addMessage, createConversation } from '@chat/services/message.service';
 const message = async (req: Request, res: Response): Promise<void> => {
   const { error } = await Promise.resolve(messageSchema.validate(req.body));
   if (error?.details) {
-    throw new BadRequestError(error.details[0].message, 'Message create() method error');
+    throw new BadRequestError(error.details[0].message, 'Create message() method');
   }
   let file: string = req.body.file;
   const randomBytes = await Promise.resolve(crypto.randomBytes(20));
@@ -44,9 +44,7 @@ const message = async (req: Request, res: Response): Promise<void> => {
     await createConversation(`${req.body.conversationId}`, `${messageData.senderUsername}`, `${messageData.receiverUsername}`);
   }
   await addMessage(messageData);
-  res
-    .status(StatusCodes.OK)
-    .json({ message: 'Message created successfully', conversationId: req.body.conversationI, messageData: messageData });
+  res.status(StatusCodes.OK).json({ message: 'Message added', conversationId: req.body.conversationId, messageData });
 };
 
 export { message };
