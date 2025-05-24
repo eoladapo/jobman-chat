@@ -15,7 +15,7 @@ import { Channel } from 'amqplib';
 import { Server } from 'socket.io';
 
 const SERVER_PORT = 4005;
-const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'gigServer', 'debug');
+const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'chatServer', 'debug');
 let chatChannel: Channel;
 let socketIOChatObject: Server;
 
